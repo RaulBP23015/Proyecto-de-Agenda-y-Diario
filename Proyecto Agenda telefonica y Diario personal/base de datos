@@ -1,0 +1,32 @@
+import sqlite3
+
+# Crear base de datos y tablas
+def crear_base_datos():
+    conn = sqlite3.connect('agenda_diario.db')
+    cursor = conn.cursor()
+
+    # Crear tabla para contactos
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS contactos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT NOT NULL,
+        telefono TEXT NOT NULL,
+        correo TEXT,
+        direccion TEXT
+    )
+    ''')
+
+    # Crear tabla para diario
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS diario (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        fecha TEXT NOT NULL,
+        texto TEXT NOT NULL
+    )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+# Llamar a la función para crear la base de datos al iniciar la aplicación
+crear_base_datos()
